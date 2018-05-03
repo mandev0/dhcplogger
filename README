@@ -1,0 +1,83 @@
+Program aktif geliştirmede değildir. Programa destek devam etmemektedir.
+
+V 0.2.2:
+—Yeniden ayarlama gerekli (Yeniden ayarlar için: dhcplogger.2.2.py -d))
+—İlk ayarlar yapılpıldıktan sonra otomatik olarak veri göndermeye çalışması durduruldu. İlk çalışmada artık sadece yeni
+ayarları kayıt ediyor.
+—İlerleyen zamanlarda openSSL ile imzalama özelliği eklenecek bir ön hazırlık yapıldı. (Kurulumu tekrar gözden geçirin.)
+—Dosya isimleri artık sürüm numarasına sahip çalıştırırken yazmayı ihmal etmeyin.
+
+V 0.2.0:
+—Hataları gidermek için leases dosyasını ayıklarken kullanılan algoritma değiştirildi.
+—Programa saat fonksiyonu eklendi. (Belli aralıklarla kayıt alınması için)
+—Konsoldan çalıştığında farklı cron programı ile otomatik olarak çalıştığı zaman kayıt yerleri ile ilgili bir problem giderildi.
+
+################################################################
+—KURULUM—
+
+Mevcut sürümler için: 0.2.2
+
+—PFSENSE MAKİNEYE SMBCLİENT KURULUMU—
+```
+pkg update
+pkg install samba36-smbclient
+```
+
+Komutları ile samba kurulumunu gerçekleştiriyoruz.
+
+1-)pfSense arayüzüne giriş yaptıktan sonra;
+
+```
+Diagnostics->Command Prompt
+```
+
+sayfasındaki upload kısmından indirdiğimiz dhcplogger.x.x.x.py dosyasını yüklüyoruz.
+
+2-)İlk ayarları yapmak için pfSense makinemize SSH ile bağlanmamız gerekiyor.
+2a-)pfSense makinemize bağlanmak için Putty programını kullanacağız.
+2b-)“Host Name” bölümüne pfSense makinemizin ip adresini giriyoruz ve “open” diyoruz.
+Login as: root
+Password: Web arayüzü admin şifreniz
+2c-)8 seçeneğini seçip konsolu açıyoruz:
+Sırasıyla aşağıdaki komutları girelim.
+
+```
+mv /tmp/dhcplogger.x.x.x.py /sbin // Dosyamızı /sbin klasörüne taşıyoruz.
+mkdir /var/log/dhcplogger // Log dosyaları için klasör oluşturuyoruz.
+python2 /sbin/dhcplogger.py //Son olarak programı çalıştırıyoruz.
+```
+
+3-)Daha önceden bir ayar oluşturulmadığı için ilk ayarları girmemiz isteniyor:
+Ip: pfSense makinesinin ip adresi
+Klasör: Hedef makinedeki paylaşılan klasörün adı
+Kullanıcı: Hedef makinedeki kullanıcı adı
+Şifre: Kullanıcının şifresi
+Saat: Kaç saatte bir kayıt yenilemesini istiyorsanız.
+Kayıt şekli: Hangi yöntem ile kayıt alacaksınız: 1 veya 2 (openSSL seçeneği aktif olmadığı için şimdilik sadece 1’i seçebilirsiniz.)
+ve ayarları kaydetmek için “e” diyoruz.
+(Sonradan ayarları değiştirmek isterseniz:
+
+```
+python2 /sbin/dhcplogger.py -d
+```
+
+şeklinde yazmanız yeterli)
+
+—Windows’da Dosya Paylaşımı—
+
+5a-)Windows bilgisayarımızda c: sürücümüze bir klasör oluşturup bunu paylaşıma açıyoruz.
+Önemli Nokta: Paylaşıma açtığınız klasöre eklediğiniz kullanıcı ile yukarıda ayarlara yazdığınız değerler aynı olmalıdır.
+
+—Cron Oluşturmak—
+
+1-)Programı ayarlarken seçtiğiniz saat aralığını crona giriniz:
+
+```
+* */5 * * * KOMUT
+```
+
+– Yukarıda girdiğim 5 değeri sizin programı kurarken girdiğiniz saat değeriyle aynı olmalı.
+
+```
+python2 /sbin/dhcplogger.py
+```
