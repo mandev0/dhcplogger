@@ -18,7 +18,8 @@ V 0.2.0:
 Mevcut sürümler için: 0.2.2
 
 —PFSENSE MAKİNEYE SMBCLİENT KURULUMU—
-```
+
+```bash
 pkg update
 pkg install samba36-smbclient
 ```
