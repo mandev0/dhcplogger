@@ -75,10 +75,10 @@ leases=[]
 le_split=[]
 leases=dhcpfile.split("lease") ##Belge istenilen parcalara ayrildi.
 x=1
-y=len(leases) ##Listedeki degerlerin sayisi y deðiskenine atanir.
+y=len(leases) ##Listedeki degerlerin sayisi y deÃ°iskenine atanir.
 #---
 ###- Kayit dosyasi
-dhcp5651=open("/var/log/dhcplogger/dhcp5651_{0}_{1}.txt".format(tarihdosya,saatdosya),"a") ##Kayitlarin tutulacaði dosya o gunun tarihine gore isimlendirilerek acilir.
+dhcp5651=open("/var/log/dhcplogger/dhcp5651_{0}_{1}.txt".format(tarihdosya,saatdosya),"a") ##Kayitlarin tutulacaÃ°i dosya o gunun tarihine gore isimlendirilerek acilir.
 #---
 ###- Baslangic degerleri
 dhcp5651.write("Ip adresi")
@@ -98,7 +98,7 @@ dhcp5651.write("\t")
 dhcp5651.write("Mac adresi")
 #---
 ########################################################
-### DOSYALARI GÖNDERMEK IÇIN AYARLAR ".CONF" DOSYASI ###
+### DOSYALARI GÃ–NDERMEK IÃ‡IN AYARLAR ".CONF" DOSYASI ###
 ########################################################
 check=0
 first_run=True
@@ -118,14 +118,13 @@ deger=config_zero.split(":")
 ##Ip        # deger[1]
 ##Klasor    # deger[2]
 ##Kullanici # deger[3]
-##Þifre     # deger[4]
+##Ãžifre     # deger[4]
 ##Saat      # deger[5]
 ##Send      # deger[6]
 print "#########################################################################- O X#"
 print "#                                  Selim Akpinar                              #"
 print "#                              pfSense log kaydedici                          #"
 print "#                                    Surum 0.2.2                              #"
-print "#            Surum notlari www.github.com/akpinarselim/dhcplogger/            #"
 print "#-----------------------------------------------------------------------------#"
 print "#Varsayilan degerler:                                                         #"
 print "#---                                                                          #"
@@ -138,7 +137,7 @@ print "#Loglama sekli: " + deger[6] + "                                         
 print "#Duzenlemek icin '-d' parametlersini giriniz. (or. .../dhcplogger.py -d)      #"
 print "###############################################################################"
 print ""
-if deger[0] == "0": ##Kullanicidan veriler istenir ve deðiskenlere atanir.
+if deger[0] == "0": ##Kullanicidan veriler istenir ve deÃ°iskenlere atanir.
     while True:
         ip=raw_input("Hedef bilgisayarin ip adresi: ")
         share_folder=raw_input("Hedef bilgisayardaki paylasilan klasorun adi: ")
@@ -154,7 +153,7 @@ if deger[0] == "0": ##Kullanicidan veriler istenir ve deðiskenlere atanir.
             check=1
             break
 if say == 2:
-    if sys.argv[1] == "-d": ##Kullanicidan veriler istenir ve deðiskenlere atanir.
+    if sys.argv[1] == "-d": ##Kullanicidan veriler istenir ve deÃ°iskenlere atanir.
         while True:
             try:
                 while True:
@@ -251,7 +250,7 @@ if first_run and deger[6]=="1":
 	os.system(smb_com)
 if first_run==False:
 	print "Ilk ayarlar basariyla yazildi."
-	print "Lutfen olumlu olumsuz yorumlarýnýzý esirgemeyin..."
+	print "Lutfen olumlu olumsuz yorumlarÃ½nÃ½zÃ½ esirgemeyin..."
 #---
 
 
